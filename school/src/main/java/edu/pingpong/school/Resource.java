@@ -11,6 +11,13 @@ public class Resource {
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     public String hello() {
-        return "Hello RESTEasy";
+        return "HOLA ESTUDIANTES";
+    }
+
+    @GET
+    @Produces(MediaType.TEXT_PLAIN)
+    @Path("/students")
+    public String getStudents() {
+        return "Aquí aparecerán todos los Estudiantes";
     }
 }
