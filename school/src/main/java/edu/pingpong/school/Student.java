@@ -14,15 +14,49 @@ import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 public class Student extends PanacheEntityBase{
 
     @Id
-    private Long id;
+    @Column(unique=true ,name = "name")
+    public String name;
 
-    @Column
-    private String name;
+    @Column(name = "age")
+    public int age;
 
    
     @ManyToOne
-    @JoinColumn(name = "school")
-    private School school;
+    @JoinColumn(name = "school_name")
+    public School school;
+
+
+    public String getName() {
+        return name;
+    }
+
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+
+    public int getAge() {
+        return age;
+    }
+
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+
+    public Student(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+
+    public Student() {
+    }
+
+    
+    
 
 
 
