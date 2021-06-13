@@ -2,15 +2,16 @@ package edu.pingpong.school;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 
 @Entity
@@ -18,14 +19,14 @@ import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 public class School extends PanacheEntityBase{
 
     @Id    
-    @Column(name="school_name",unique = true,nullable = false)
+    @Column(name="school_name",unique = true, nullable = false)
     public String name;
 
     @Column(name = "location")
     public String location;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "school")//Esto hace referencia al objeto school (a la entidad completa)
+    @OneToMany(mappedBy = "school",cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)//Esto hace referencia al objeto school (a la entidad completa)
     public List<Student> students;
 
     public String getName() {
